@@ -12,7 +12,7 @@ using MyWalletAPI.Data;
 namespace MyWalletAPI.Migrations
 {
     [DbContext(typeof(MyWalletDBContext))]
-    [Migration("20230225171732_InitialDB")]
+    [Migration("20230225181111_InitialDB")]
     partial class InitialDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

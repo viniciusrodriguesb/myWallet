@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MyWalletAPI.Models;
+using MyWalletAPI.Repositories;
+using MyWalletAPI.Repositories.Interfaces;
 
 namespace MyWalletAPI.Controllers
 {
@@ -9,32 +11,47 @@ namespace MyWalletAPI.Controllers
     public class UsuarioController : ControllerBase
     {
 
-        [HttpGet]
-        public ActionResult<List<UsuarioModel>> BuscarTodosUsuarios()
+        public readonly IUsuarioRepositorio _usuarioRepositorio;
+
+        public UsuarioController(IUsuarioRepositorio usuarioRepositorio)
         {
-            //Apenas para retornar algo, nao foi implementado
+            _usuarioRepositorio = usuarioRepositorio;
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<List<UsuarioModel>>> BuscarTodosUsuarios()
+        {
+            List<UsuarioModel> usuario = await _usuarioRepositorio.BuscarTodosUsuarios();
             return Ok();
         }
 
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<ActionResult<List<UsuarioModel>>> BuscarPorID(int id)
         {
-            return "value";
+            UsuarioModel usuario = await _usuarioRepositorio.BuscarUsuarioID(id);
+            return Ok(usuario);
         }
 
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<ActionResult<List<UsuarioModel>>> Cadastrar([FromBody] UsuarioModel usuarioModel)
         {
+            UsuarioModel usuario = await _usuarioRepositorio.AdicionarUsuario(usuarioModel);
+            return Ok(usuario);
         }
 
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<ActionResult<List<UsuarioModel>>> Atualizar([FromBody] UsuarioModel usuarioModel, int id)
         {
+            usuarioModel.Id = id;
+            UsuarioModel usuario = await _usuarioRepositorio.AtualizarUsuario(usuarioModel, id);
+            return Ok(usuario);
         }
 
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<ActionResult<List<UsuarioModel>>> Apagar(int id)
         {
+            bool apagado = await _usuarioRepositorio.ApagarUsuario(id);
+            return Ok(apagado);
         }
     }
 }
