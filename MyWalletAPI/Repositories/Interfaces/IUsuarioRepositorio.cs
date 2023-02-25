@@ -12,6 +12,7 @@ namespace MyWalletAPI.Repositories.Interfaces
 
         Task<UsuarioModel> AtualizarUsuario(UsuarioModel usuario, int id);
 
+        //booleano se existir o id, retorna true, se nao false.
         Task<bool> ApagarUsuario(int id);
     }
 }

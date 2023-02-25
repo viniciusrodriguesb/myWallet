@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MyWalletAPI.Map;
 using MyWalletAPI.Models;
 
 //Trabalhando com ORM, independe de qual banco está sendo usado
@@ -18,6 +19,7 @@ namespace MyWalletAPI.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.ApplyConfiguration(new UsuarioMap());
             base.OnModelCreating(modelBuilder);
         }
     }

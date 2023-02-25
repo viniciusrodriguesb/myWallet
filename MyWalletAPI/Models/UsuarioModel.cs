@@ -18,6 +18,6 @@
 
         public string state { get; set; }
 
-        public string birth { get; set; }
+        public DateTime birth { get; set; }
     }
 }
