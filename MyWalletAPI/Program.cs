@@ -1,3 +1,8 @@
+using Microsoft.EntityFrameworkCore;
+using MyWalletAPI.Data;
+using MyWalletAPI.Repositories;
+using MyWalletAPI.Repositories.Interfaces;
+
 namespace MyWalletAPI
 {
     public class Program
@@ -12,6 +17,13 @@ namespace MyWalletAPI
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+
+            builder.Services.AddEntityFrameworkSqlServer()
+            .AddDbContext<MyWalletDBContext>(
+                options => options.UseSqlServer(builder.Configuration.GetConnectionString("DataBase"))
+            );
+
+            builder.Services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
 
             var app = builder.Build();
 

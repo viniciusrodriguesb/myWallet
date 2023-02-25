@@ -56,13 +56,14 @@ namespace MyWalletAPI.Repositories
                 throw new Exception($"Usuário ID: {id} não foi encontrado.");
             }
 
-            usuarioPorID.Name = usuario.Name;
-            usuarioPorID.Usuario = usuario.Usuario;
+            usuarioPorID.nome = usuario.nome;
+            usuarioPorID.usuario = usuario.usuario;
             usuarioPorID.email = usuario.email;
-            usuarioPorID.password = usuario.password;
-            usuarioPorID.phone = usuario.phone;
-            usuarioPorID.city = usuario.city;
-            usuarioPorID.birth = usuario.birth;
+            usuarioPorID.senha= usuario.senha;
+            usuarioPorID.telefone = usuario.telefone;
+            usuarioPorID.cidade = usuario.cidade;
+            usuarioPorID.estado = usuario.estado;
+            usuarioPorID.aniversario = usuario.aniversario;
 
             _dbContext.Usuarios.Update(usuarioPorID);
             await _dbContext.SaveChangesAsync();
